@@ -1,0 +1,27 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    margin: 0;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.board { 
+    border: 3px, solid, black;
+    display: grid;
+    grid-template-columns: repeat(4, 10vmin);
+    grid-template-rows: repeat(4, 10vmin);
+    /* there is too much hard coding here. test in progress TODO: make adaptive to difficulty */
+}
+
+.board > div {
+    border: 2px, solid, navy;
+    background-color: seagreen;
+}

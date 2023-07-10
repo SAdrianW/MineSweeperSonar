@@ -1,20 +1,13 @@
 /*------ Constants ------*/
 const DIFFICULTY_LVL = {
-    easy: {mines: 10, boardSize: 'small'},
-    med: {mines: 40, boardSize: 'medium'},
-    hard: {mines: 99, boardSize: 'large'},
-    square: {mines: 10, boardSize: 'square'},
-    test: {mines: 3, boardSize: 'test'}
+    easy: {mines: 10, rows: 9, columns: 19},
+    med: {mines: 40,rows: 15, columns: 31},
+    hard: {mines: 99 ,rows: 21, columns: 43},
+    square: {mines: 10,rows: 10, columns: 10},
+    test: {mines: 3, rows: 4, columns: 4}
 };
-// Will always reference at least square. With diff
+// Will always reference at least square.
 
-const BOARD_OPTIONS = { // add into ^
-    easy: {rows: 9, columns: 19},
-    med: {rows: 15, columns: 31},
-    hard: {rows: 21, columns: 43},
-    square: {rows: 10, columns: 10},
-    test: {rows: 4, columns: 4}
-};
 
 
 
@@ -31,13 +24,12 @@ let visibility;     // cells change to visable after being clicked
 
 let minesTotal;   // depends on difficulty. easy = 10, med = 40, hard = 99
  
-// let mineLocations;  // num = ^. randomCell (use Math.random row * collumn). While loop to iterate loops = ^
 
 /*------ Cached Elements ------*/
 // Elements to be accessed repeatedly. saved here for efficency
 
 const resetBtn = document.getElementById('reset');
-const diffSelection = document.getElementById(diffChoice);
+// const diffSelection = document.getElementById(diffChoice);
 
 /*------ Event Listeners ------*/
 document.querySelector('.board').addEventListener('click', sonarPing); // player choice of cell selection
@@ -58,15 +50,14 @@ function initialise() {
         [0, 0, 0, 0],
         [0, 0, 0, 0],
         [0, 0, 0, 0],
-    ]; // had code todo change
-    // // ??? ASK ??? path for desired board info: BOARD_OPTIONS[DIFFICULTY_LVL.boardSize] TODO: find function that makes array based on paramaters supplied
+    ]; // hard code. todo change
     timer = 0;
-    // result = inGame;
-    // visibility = hidden; // this is currently being done by renderBoard.
+    // result = 'inGame';
+    // visibility = 'hidden'; // this is currently being done by renderBoard.
     difficulty = 'test'; // hard code for testing. todo remove when diff options work
     minesTotal = 3 // hard code for testing. todo remove when diff options work
     // ??? ASK ??? path for mines. DIFFICULTY_LVL.{diffChoice.mines}; todo: fix this
-    renderMines();
+    mineLocations();
     render();
 };
 
@@ -76,7 +67,7 @@ function initialise() {
 // // Render: displays/ visualise the game to the DOM
 //  !!! HELP !!! returns undefined in console. solved
 function render() {
-    console.log('stuff')
+    console.log('ren-deng-deng-deng')
     renderBoard();
     // renderTimer();
 };
@@ -99,29 +90,26 @@ function renderBoard() {
 
 // };
 
-//  replace with placeMines
-function renderMines() { 
-    mineLocations();
-};
 
-//  !!! HELP !!! works independantly, calls place mine, which displays its code rather than running
+
 function mineLocations() { 
     let i = 0;
     while (i < minesTotal) {
         placeMine();
         i++;
-        console.log(placeMine)
+        // console.log(placeMine)
     }
 };
 
-//  !!! HELP !!! works independantly with hard coded cellId
+
+// let mineLocations;  // num = ^. randomCell (use Math.random row * collumn). While loop to iterate loops = ^
 function placeMine() { 
     let rowIdx = Math.floor(Math.random() * (1, 4)); // 3 is hard code for diff. todo remove when diff options work
     let colIdx = Math.floor(Math.random() * (1, 4));
     let cellId = `r${rowIdx}c${colIdx}`;
     const cellEl = document.querySelector(`.${cellId}`);
     cellEl.innerText = 'X';
-    console.log(cellEl)
+    // console.log(cellEl)
 };
 
 
@@ -153,9 +141,17 @@ function diffChoice() {
 };
 
 function resetGame(evt) {
+    board.forEach(function(colArr, colIdx) {
+        colArr.forEach(function(cellVal, rowIdx) {
+            const cellId = `r${rowIdx}c${colIdx}`;
+            const cellEl = document.querySelector(`.${cellId}`);
+            cellEl.classList.remove("revealed"); 
+            cellEl.innerText = ""; // this is/was a test finction. maybe needed later?
+        });
+    });
     initialise(); 
-    //  !!! HELP !!!  this doesn't appear to do anything... not even console.log undefined
     console.log('game reset');
 };
+// I think the reset function is fully working. Ignore below comments, unless it isn't
 // reset: may not add hiddem class. or may add second. currently hard coded html
 // might need to move hidden to init function.

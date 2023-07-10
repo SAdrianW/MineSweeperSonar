@@ -1,17 +1,17 @@
 /*------ Constants ------*/
 const DIFFICULTY_LVL = {
-    // easy: {mines: 10, boardSize: 'small'},
-    // med: {mines: 40, boardSize: 'medium'},
-    // hard: {mines: 99, boardSize: 'large'},
+    easy: {mines: 10, boardSize: 'small'},
+    med: {mines: 40, boardSize: 'medium'},
+    hard: {mines: 99, boardSize: 'large'},
     square: {mines: 10, boardSize: 'square'},
     test: {mines: 3, boardSize: 'test'}
 };
 // Will always reference at least square. With diff
 
-const BOARD_OPTIONS = {
-    // easy: {rows: 9, columns: 19},
-    // med: {rows: 15, columns: 31},
-    // hard: {rows: 21, columns: 43},
+const BOARD_OPTIONS = { // add into ^
+    easy: {rows: 9, columns: 19},
+    med: {rows: 15, columns: 31},
+    hard: {rows: 21, columns: 43},
     square: {rows: 10, columns: 10},
     test: {rows: 4, columns: 4}
 };
@@ -58,14 +58,15 @@ function initialise() {
         [0, 0, 0, 0],
         [0, 0, 0, 0],
         [0, 0, 0, 0],
-    ];
-    // // path for desired board info: BOARD_OPTIONS[DIFFICULTY_LVL.boardSize] TODO: find function that makes array based on paramaters supplied
+    ]; // had code todo change
+    // // ??? ASK ??? path for desired board info: BOARD_OPTIONS[DIFFICULTY_LVL.boardSize] TODO: find function that makes array based on paramaters supplied
     timer = 0;
     // result = inGame;
     // visibility = hidden; // this is currently being done by renderBoard.
     difficulty = 'test'; // hard code for testing. todo remove when diff options work
     minesTotal = 3 // hard code for testing. todo remove when diff options work
-    // path for mines. DIFFICULTY_LVL.{diffChoice.mines}; todo: fix this
+    // ??? ASK ??? path for mines. DIFFICULTY_LVL.{diffChoice.mines}; todo: fix this
+    renderMines();
     render();
 };
 
@@ -73,11 +74,11 @@ function initialise() {
 
 
 // // Render: displays/ visualise the game to the DOM
-//  !!! HELP !!! returns undefined in console
+//  !!! HELP !!! returns undefined in console. solved
 function render() {
+    console.log('stuff')
     renderBoard();
     // renderTimer();
-    // renderMines();
 };
 
 //  !!! HELP !!! returns undefined in console
@@ -87,7 +88,7 @@ function renderBoard() {
             const cellId = `r${rowIdx}c${colIdx}`;
             const cellEl = document.querySelector(`.${cellId}`);
             // console.log(cellEl);
-            // cellEl.classList.remove("revealed"); //  having this here cancels out sonarPing. todo delete?
+            // cellEl.classList.remove("revealed"); //  put entire function in reset
             cellEl.classList.add("hidden"); // todo delete?
             // cellEl.innerText = ""; // this is/was a test finction. maybe needed later?
         });
@@ -98,7 +99,7 @@ function renderBoard() {
 
 // };
 
-//  !!! HELP !!! works independantly, calls sub functions
+//  replace with placeMines
 function renderMines() { 
     mineLocations();
 };

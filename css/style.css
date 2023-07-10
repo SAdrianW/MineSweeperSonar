@@ -10,11 +10,23 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    /* background-color: seagreen; */
 }
 
+header {
+    text-align: center;
+}
+
+.info-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    column-gap: 15px;
+}
 
 .board { 
-    border: 3px, solid, black;
+    border: 3px solid black;
     display: grid;
     grid-template-columns: repeat(4, 10vmin);
     grid-template-rows: repeat(4, 10vmin);
@@ -22,6 +34,26 @@ body {
 }
 
 .board > div {
-    border: 2px, solid, navy;
-    background-color: seagreen;
+    /* border: 2p dashed navy; */
+    outline: 2p dashed navy;
+    /* background-color: seagreen; */
+}
+
+.hidden {
+    /* border: 2px dotted navy; */
+    outline: 2px dotted navy;
+    background-color: rgb(42, 148, 235);
+    color: transparent;
+}
+
+.revealed {
+    /* border: 2px double navy; */
+    outline: 2px double navy;
+    background-color: rgb(21, 69, 109);
+    color: greenyellow;
+}
+
+
+h3 {
+    text-align: center;
 }

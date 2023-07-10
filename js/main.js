@@ -17,6 +17,7 @@ const BOARD_OPTIONS = {
 };
 
 
+
 /*------ State Variables ------*/
 let board;      // array; square (or cone if enough time)
 
@@ -28,9 +29,9 @@ let difficulty;     // ? Optional ? easy, med or hard
 
 let visibility;     // cells change to visable after being clicked
 
-let minesRemaing;   // depends on difficulty. easy = 10, med = 40, hard = 99
+let minesTotal;   // depends on difficulty. easy = 10, med = 40, hard = 99
  
-let mineLocations;  // num = ^. randomCell (use Math.random row * collumn). While loop to iterate loops = ^
+// let mineLocations;  // num = ^. randomCell (use Math.random row * collumn). While loop to iterate loops = ^
 
 /*------ Cached Elements ------*/
 // Elements to be accessed repeatedly. saved here for efficency
@@ -41,7 +42,7 @@ const diffSelection = document.getElementById(diffChoice);
 /*------ Event Listeners ------*/
 document.querySelector('.board').addEventListener('click', sonarPing); // player choice of cell selection
 // document.getElementById('diff-options').addEventListener('click', diffChoice);
-// document.getElementById('reset').addEventListener('click', initialise);
+document.querySelector('.reset').addEventListener('click', resetGame);
 
 
 /*------ Functions ------*/
@@ -49,8 +50,9 @@ document.querySelector('.board').addEventListener('click', sonarPing); // player
 initialise();
 // prepares the game to be played, readies all state
 
+// !!! HELP !!! returns undefined in console. yet cells gain hidden style via renderBoard
 function initialise() {
-    // rotate 90deg counter-clockwise to visualise to DOM.
+    // rotate 90deg counter-clockwise to visualise to DOM?
     board = [
         [0, 0, 0, 0],
         [0, 0, 0, 0],
@@ -60,9 +62,10 @@ function initialise() {
     // // path for desired board info: BOARD_OPTIONS[DIFFICULTY_LVL.boardSize] TODO: find function that makes array based on paramaters supplied
     timer = 0;
     // result = inGame;
-    // visibility = hidden; 
-    difficulty = diffChoice;
-    // minesRemaing = DIFFICULTY_LVL.{diffChoice.mines};
+    // visibility = hidden; // this is currently being done by renderBoard.
+    difficulty = 'test'; // hard code for testing. todo remove when diff options work
+    minesTotal = 3 // hard code for testing. todo remove when diff options work
+    // path for mines. DIFFICULTY_LVL.{diffChoice.mines}; todo: fix this
     render();
 };
 
@@ -70,21 +73,23 @@ function initialise() {
 
 
 // // Render: displays/ visualise the game to the DOM
+//  !!! HELP !!! returns undefined in console
 function render() {
     renderBoard();
     // renderTimer();
     // renderMines();
 };
 
+//  !!! HELP !!! returns undefined in console
 function renderBoard() {
     board.forEach(function(colArr, colIdx) {
         colArr.forEach(function(cellVal, rowIdx) {
             const cellId = `r${rowIdx}c${colIdx}`;
             const cellEl = document.querySelector(`.${cellId}`);
             // console.log(cellEl);
-            // cellEl.classList.add("hidden"); todo delete?
-            // cellEl.style.backgroundColor = 'purple';
-            // cellEl.innerText = "";
+            // cellEl.classList.remove("revealed"); //  having this here cancels out sonarPing. todo delete?
+            cellEl.classList.add("hidden"); // todo delete?
+            // cellEl.innerText = ""; // this is/was a test finction. maybe needed later?
         });
     });
 };
@@ -93,19 +98,40 @@ function renderBoard() {
 
 // };
 
-// function renderMines() {
+//  !!! HELP !!! works independantly, calls sub functions
+function renderMines() { 
+    mineLocations();
+};
 
-// };
+//  !!! HELP !!! works independantly, calls place mine, which displays its code rather than running
+function mineLocations() { 
+    let i = 0;
+    while (i < minesTotal) {
+        placeMine();
+        i++;
+        console.log(placeMine)
+    }
+};
+
+//  !!! HELP !!! works independantly with hard coded cellId
+function placeMine() { 
+    let rowIdx = Math.floor(Math.random() * (1, 4)); // 3 is hard code for diff. todo remove when diff options work
+    let colIdx = Math.floor(Math.random() * (1, 4));
+    let cellId = `r${rowIdx}c${colIdx}`;
+    const cellEl = document.querySelector(`.${cellId}`);
+    cellEl.innerText = 'X';
+    console.log(cellEl)
+};
 
 
 // guard: if (evt.target.tagName !== 'CELL') return; // this should prevent clicks from happening "out of bounds"
                       // ^ or className, if that works
 
 function sonarPing(evt) {
-    console.log(evt.target, 'ping');
+    // console.log(evt.target, 'ping'); // test
     evt.target.classList.remove('hidden');
     evt.target.classList.add('revealed');
-    console.log(evt.target, 'woop');
+    // console.log(evt.target, 'woop'); // test
     
     render();
 
@@ -125,6 +151,10 @@ function diffChoice() {
 
 };
 
-
+function resetGame(evt) {
+    initialise(); 
+    //  !!! HELP !!!  this doesn't appear to do anything... not even console.log undefined
+    console.log('game reset');
+};
 // reset: may not add hiddem class. or may add second. currently hard coded html
 // might need to move hidden to init function.

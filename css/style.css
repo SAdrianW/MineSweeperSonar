@@ -50,7 +50,9 @@ header {
     /* border: 2px double navy; */
     outline: 2px double navy;
     background-color: rgb(21, 69, 109);
-    color: greenyellow;
+    color: rgb(222, 117, 25);
+    text-align: center;
+    font-size: 8vmin;
 }
 
 

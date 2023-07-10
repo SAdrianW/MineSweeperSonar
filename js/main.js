@@ -33,6 +33,7 @@ const resetBtn = document.getElementById('reset');
 
 /*------ Event Listeners ------*/
 document.querySelector('.board').addEventListener('click', sonarPing); // player choice of cell selection
+document.querySelector('.board').addEventListener('click', adjMines); // player choice of cell selection
 // document.getElementById('diff-options').addEventListener('click', diffChoice);
 document.querySelector('.reset').addEventListener('click', resetGame);
 
@@ -67,7 +68,7 @@ function initialise() {
 // // Render: displays/ visualise the game to the DOM
 //  !!! HELP !!! returns undefined in console. solved
 function render() {
-    console.log('ren-deng-deng-deng')
+    // console.log('ren-deng-deng-deng')
     renderBoard();
     // renderTimer();
 };
@@ -120,15 +121,41 @@ function sonarPing(evt) {
     // console.log(evt.target, 'ping'); // test
     evt.target.classList.remove('hidden');
     evt.target.classList.add('revealed');
-    // console.log(evt.target, 'woop'); // test
     
+    // adjacent mines
+    adjMines();
+
     render();
 
     // EventTarget.class = visable;
 };
 // sonarPing: responds to user interaction. (probably not the best name, but it is on theme)
 
+// function adjMines (evt) {
+    // let cellId = evt.target;
+    // let numMines = 0;
+    // let row = 
 
+    // let minRow = row - 1;
+    // let maxRow = row + 1;
+    // let minCol = col - 1;
+    // let maxCol = col + 1;
+
+    // if (minRow < 0) minRow = 0;
+    // if (maxRow > board.length) maxRow = board.length - 1;
+    // if (minCol < 0) minCol = 0;
+    // if (maxCol > board.length) maxCol = board.length - 1;
+
+
+    // for (row = minRow; row <= maxRow; row++) {
+    //     for (col = minCol; col <= maxCol; row++) {
+    //         if (board[row][col].innerText === 'X') count++;
+    //     }
+    // }
+    // console.log(cellId);
+    // console.log(numMines);
+    // return numMines;
+// };
 
 
 

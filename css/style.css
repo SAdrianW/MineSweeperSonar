@@ -10,7 +10,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    /* background-color: seagreen; */
+    background-color: #2891ac;
 }
 
 header {
@@ -54,7 +54,8 @@ header {
     text-align: center;
     font-size: 8vmin;
 }
-
+/* .revealed will be used for empty cells */
+/* TODO: create classes for adjMines and mine */
 
 h3 {
     text-align: center;

@@ -1,9 +1,9 @@
 /*------ Constants ------*/
 const DIFFICULTY_LVL = {
     easy: {mines: 10, rows: 9, columns: 19},
-    med: {mines: 40,rows: 15, columns: 31},
-    hard: {mines: 99 ,rows: 21, columns: 43},
-    square: {mines: 10,rows: 10, columns: 10},
+    med: {mines: 40, rows: 15, columns: 31},
+    hard: {mines: 99 , rows: 21, columns: 43},
+    square: {mines: 10, rows: 10, columns: 10},
     test: {mines: 3, rows: 4, columns: 4}
 };
 // Will always reference at least square.
@@ -43,7 +43,6 @@ document.querySelector('.reset').addEventListener('click', resetGame);
 initialise();
 // prepares the game to be played, readies all state
 
-// !!! HELP !!! returns undefined in console. yet cells gain hidden style via renderBoard
 function initialise() {
     // rotate 90deg counter-clockwise to visualise to DOM?
     board = [
@@ -57,7 +56,6 @@ function initialise() {
     // visibility = 'hidden'; // this is currently being done by renderBoard.
     difficulty = 'test'; // hard code for testing. todo remove when diff options work
     minesTotal = 3 // hard code for testing. todo remove when diff options work
-    // ??? ASK ??? path for mines. DIFFICULTY_LVL.{diffChoice.mines}; todo: fix this
     mineLocations();
     render();
 };
@@ -66,14 +64,12 @@ function initialise() {
 
 
 // // Render: displays/ visualise the game to the DOM
-//  !!! HELP !!! returns undefined in console. solved
 function render() {
     // console.log('ren-deng-deng-deng')
     renderBoard();
     // renderTimer();
 };
 
-//  !!! HELP !!! returns undefined in console
 function renderBoard() {
     board.forEach(function(colArr, colIdx) {
         colArr.forEach(function(cellVal, rowIdx) {
@@ -133,12 +129,12 @@ function sonarPing(evt) {
 
 // hard code something that works, then add variables
 function adjMines (evt) {
-    let cellId = evt.target.id; // 1, 2
+    let cellId = evt.target.id; 
     cellId = cellId.split('');
     let row = Number(cellId[1]);
     let col = Number(cellId[3]);
     let numMines = 0;
-        // if ( row > 0 && row < 3)
+        
     let minRow = row - 1;
     let maxRow = row + 1;
     let minCol = col - 1;
@@ -152,7 +148,8 @@ function adjMines (evt) {
 
     for (let rowIdx = minRow; rowIdx <= maxRow; rowIdx++) {
         for (let colIdx = minCol; colIdx <= maxCol; colIdx++) {
-            if (document.querySelector(`#r${rowIdx}c${colIdx}`).innerText === 'X') numMines++;
+            let candidate = document.querySelector(`#r${rowIdx}c${colIdx}`);
+            if (candidate.innerText === 'X' && candidate !== evt.target) numMines++;
             // if (board[rowIdx][colIdx].innerText === 'X') count++;
         }
     }

@@ -8,9 +8,15 @@
 
 
 
-function adjMines(evt) {
-    
-};
+// TODO
+// flood fill
+// win logic
+
+
+
+
+
+
 
 // on click if cell is empty (null) ; 
 // Check adjacent (adj) cells for mines: 	
@@ -62,33 +68,33 @@ let adjExample = [
 
 // https://stackoverflow.com/questions/66806921/minesweeper-problem-to-recover-the-mines-adjacent-to-a-tile
 
-function getAdjacentMines(row, col) {   // name is self explanatory
-    let count = 0;          // count number of mines
-    let minRow = row - 1;   // look at rows less than the current by 1
-    let maxRow = row + 1;   // up to rows more than current by 1
-    let minCol = col - 1;   // columns less than current by 1
-    let maxCol = col + 1;   // columns more than current by 1
-            // these functions?(variables?) constrain our search to 
-            // cells adjacent to current by 1. They keep the search relevant
-            // could change to different value for wider search
+// function getAdjacentMines(row, col) {   // name is self explanatory
+//     let count = 0;          // count number of mines
+//     let minRow = row - 1;   // look at rows less than the current by 1
+//     let maxRow = row + 1;   // up to rows more than current by 1
+//     let minCol = col - 1;   // columns less than current by 1
+//     let maxCol = col + 1;   // columns more than current by 1
+//             // these functions?(variables?) constrain our search to 
+//             // cells adjacent to current by 1. They keep the search relevant
+//             // could change to different value for wider search
 
-    if (minRow < 0) minRow = 0;     
-    if (maxRow > board.length) maxRow = board.length - 1;
-    if (minCol < 0) minCol = 0;     
-    if (maxCol > board.length) maxCol = board.length - 1;
-            // these 4 keep the comparison within the scope of the board
+//     if (minRow < 0) minRow = 0;     
+//     if (maxRow > board.length) maxRow = board.length - 1;
+//     if (minCol < 0) minCol = 0;     
+//     if (maxCol > board.length) maxCol = board.length - 1;
+//             // these 4 keep the comparison within the scope of the board
 
-    for (row = minRow; row <= maxRow; row++) {      
-            // starting at the lowest row value, run function(?), then increase row by 1
-        for (col = minCol; col <= maxCol; col++) {
-            // as above but for column
-            if (board[row][col].boom === true) count++;
-            // if cellID.innerText === "x", add 1 to count variable
-        }
-    }
+//     for (row = minRow; row <= maxRow; row++) {      
+//             // starting at the lowest row value, run function(?), then increase row by 1
+//         for (col = minCol; col <= maxCol; col++) {
+//             // as above but for column
+//             if (board[row][col].boom === true) count++;
+//             // if cellID.innerText === "x", add 1 to count variable
+//         }
+//     }
 
-    return count;
-}
+//     return count;
+// }
 
 
 

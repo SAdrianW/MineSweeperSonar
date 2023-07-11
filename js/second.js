@@ -11,7 +11,13 @@
 // TODO
 // flood fill
 // win logic
+// visuals
 
+// ?O?
+// diffuculty levels
+// audio
+// 
+// cone
 
 
 

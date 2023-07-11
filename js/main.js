@@ -33,7 +33,6 @@ const resetBtn = document.getElementById('reset');
 
 /*------ Event Listeners ------*/
 document.querySelector('.board').addEventListener('click', sonarPing); // player choice of cell selection
-// document.querySelector('.board').addEventListener('click', adjMines); // player choice of cell selection
 // document.getElementById('diff-options').addEventListener('click', diffChoice);
 document.querySelector('.reset').addEventListener('click', resetGame);
 
@@ -127,7 +126,7 @@ function sonarPing(evt) {
 };
 // sonarPing: responds to user interaction. (probably not the best name, but it is on theme)
 
-// hard code something that works, then add variables
+// flood fill = recursion (self call) from this function with limiter for revealed
 function adjMines (evt) {
     let cellId = evt.target.id; 
     cellId = cellId.split('');

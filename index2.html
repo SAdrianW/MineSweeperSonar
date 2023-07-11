@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style2.css" rel="stylesheet" type="text/css" />
+    <script defer src="js/main2.js"></script>
+    <title>MineSweeper Sonar Mk.II</title>
+</head>
+
+
+<body>
+
+    <header>
+        
+        <h1 class="main-title">MineSweeper</h1>
+        <!-- both h2 els to be replaced with icons/ counters -->
+        <div class="info-box info"> 
+            <div class="time-box time info">
+                <h2 class="timer time info">Timer</h2>
+                <h4 class="time info" id="time-taken">0</h4>
+                <!-- <div class="countUp time info"></div> -->
+            </div>
+
+            <button class="reset info">Reset</button>
+
+            <div class="mine-box mine info">
+                <h2 class="remaining mine info">Mines</h2>
+                <h4 class="mine info" id="remaining-mines">0</h4> 
+                <!-- hard coded ^ to 10. should change per diff -->
+                <!-- <div class="mine-count mine info"></div> -->
+            </div>
+
+
+        </div>
+
+    </header>
+
+    <div id="board">
+        
+    </div>
+
+
+    <button id="flag-btn">Flag</button>
+
+    <footer>
+        <div class="diff-box diff">
+            <h3 class="diff-title diff">Choose your battle:</h3>
+            <div class="diff-options diff">
+                <button class="easySquare-btn diff">Easy Square</button>
+                <button class="medSquare-btn diff">Medium Square</button>
+                <button class="hardSquare-btn diff">Hard Square</button>
+                <!-- <button class="easySnr-btn diff">Easy Sonar</button>
+                <button class="medSnr-btn diff">Medium Sonar</button>
+                <button class="hardSnr-btn diff">Hard Sonar</button> 
+            these will be returned at a much later date-->
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>

@@ -1,0 +1,121 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    margin: 0;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #2891ac;
+    text-align: center;
+}
+
+header {
+    text-align: center;
+}
+
+.info-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    column-gap: 15px;
+}
+
+#board { 
+    width: 62vmin;
+    height: 62vmin;
+    border: 5px solid darkblue;
+    background-color: rgb(42, 148, 235);
+    display: flex;
+    flex-wrap: wrap;
+
+}
+
+#board div {
+    height: 6vmin;
+    width: 6vmin;
+    outline: 1px dashed navy;
+    /* text */
+    font-size: 4vmin;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+/* not needed anymore, being rolled into default state */
+/* .hidden {
+    outline: 2px dotted navy;
+    color: transparent;
+} */
+
+.revealed {     /* also known as tile-clicked */
+    outline: 2px double rgb(50, 50, 150);
+    background-color: rgb(21, 69, 109);
+    color: rgb(222, 117, 25);
+    text-align: center;
+    font-size: 8vmin;
+}
+
+
+.x1 {
+    color: blue;
+}
+
+.x2 {
+    color: green;
+}
+
+.x3 {
+    color: red;
+}
+
+.x4 {
+    color: purple;
+}
+
+.x5 {
+    color: orange;
+}
+
+.x6 {
+    color: teal;
+}
+
+.x7 {
+    color: darkorchid;
+}
+
+.x8 {
+    color:hotpink
+}
+
+
+
+#flag-btn {
+    margin-top: 4vmin;
+    width: 10vmin;
+    height: 5vmin;
+    font-size: 3vmin;
+    background-color: lightgrey;
+    /* toggle on bg greenyellow */
+    border: none;
+}
+
+h3 {
+    text-align: center;
+}
+
+footer {
+    width: 60vmin;
+    margin-bottom: 4vmin;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}

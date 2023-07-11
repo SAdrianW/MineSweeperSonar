@@ -33,7 +33,7 @@ const resetBtn = document.getElementById('reset');
 
 /*------ Event Listeners ------*/
 document.querySelector('.board').addEventListener('click', sonarPing); // player choice of cell selection
-document.querySelector('.board').addEventListener('click', adjMines); // player choice of cell selection
+// document.querySelector('.board').addEventListener('click', adjMines); // player choice of cell selection
 // document.getElementById('diff-options').addEventListener('click', diffChoice);
 document.querySelector('.reset').addEventListener('click', resetGame);
 
@@ -123,7 +123,7 @@ function sonarPing(evt) {
     evt.target.classList.add('revealed');
     
     // adjacent mines
-    adjMines();
+    adjMines(evt);
 
     render();
 
@@ -131,31 +131,35 @@ function sonarPing(evt) {
 };
 // sonarPing: responds to user interaction. (probably not the best name, but it is on theme)
 
-// function adjMines (evt) {
-    // let cellId = evt.target;
-    // let numMines = 0;
-    // let row = 
+// hard code something that works, then add variables
+function adjMines (evt) {
+    let cellId = evt.target.id; // 1, 2
+    cellId = cellId.split('');
+    let row = Number(cellId[1]);
+    let col = Number(cellId[3]);
+    let numMines = 0;
+        // if ( row > 0 && row < 3)
+    let minRow = row - 1;
+    let maxRow = row + 1;
+    let minCol = col - 1;
+    let maxCol = col + 1;
 
-    // let minRow = row - 1;
-    // let maxRow = row + 1;
-    // let minCol = col - 1;
-    // let maxCol = col + 1;
-
-    // if (minRow < 0) minRow = 0;
-    // if (maxRow > board.length) maxRow = board.length - 1;
-    // if (minCol < 0) minCol = 0;
-    // if (maxCol > board.length) maxCol = board.length - 1;
+    if (minRow < 0) minRow = 0;
+    if (maxRow >= board.length) maxRow = board.length - 1;
+    if (minCol < 0) minCol = 0;
+    if (maxCol >= board.length) maxCol = board.length - 1;
 
 
-    // for (row = minRow; row <= maxRow; row++) {
-    //     for (col = minCol; col <= maxCol; row++) {
-    //         if (board[row][col].innerText === 'X') count++;
-    //     }
-    // }
-    // console.log(cellId);
-    // console.log(numMines);
-    // return numMines;
-// };
+    for (let rowIdx = minRow; rowIdx <= maxRow; rowIdx++) {
+        for (let colIdx = minCol; colIdx <= maxCol; colIdx++) {
+            if (document.querySelector(`#r${rowIdx}c${colIdx}`).innerText === 'X') numMines++;
+            // if (board[rowIdx][colIdx].innerText === 'X') count++;
+        }
+    }
+    console.log(cellId, row, col);
+    console.log(numMines);
+    return numMines;
+};
 
 
 

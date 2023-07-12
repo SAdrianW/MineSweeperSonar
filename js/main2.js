@@ -159,8 +159,8 @@ function setFlag() {
 
 function sonarPing(evt) {
 
-    let cell = this;
-    if (flagEnabled) {
+    let cell = this;    
+    if (flagEnabled) {      // handles placing/ removing of flags
         if(cell.innerText === '') {
             cell.innerText = 'F';
         } 
@@ -170,10 +170,17 @@ function sonarPing(evt) {
         return;
     }
 
-    if (mineLocations.includes(cell.id)) {
-        alert("GAME OVER!");
+    if (mineLocations.includes(cell.id)) {  // handles clicking on a mine and ending the game
+        // alert("GAME OVER!");
         gameOver = true;
+        revealMines();
+        return;
     }
+
+    let coords = cell.id.split("-");
+    let r = parseInt(coords[0]);
+    let c = parseInt(coords[1]);
+    checkMine(r, c);
 
     // // console.log(evt.target, 'ping'); // test
     // evt.target.classList.remove('hidden');
@@ -189,6 +196,56 @@ function sonarPing(evt) {
 // // sonarPing: responds to user interaction. (probably not the best name, but it is on theme)
 // // guard: if (evt.target.tagName !== 'CELL') return; // this should prevent clicks from happening "out of bounds"
 //                       // ^ or className, if that works
+
+function revealMines() {
+    for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < columns; c++){
+            let cell = board[r][c];
+            if (mineLocations.includes(cell.id)) {
+                cell.innerText = "BOOM"
+                cell.style.backgroundColor = "orangered"
+            }
+        }
+    }
+}
+
+function checkMine(r, c) {
+    if (r < 0 || r >= rows || c < 0 || c >= columns){
+        return;     // if out of bounds return/ cancel function
+    }
+    let minesFound = 0;
+
+    // 3 cells above target
+    minesFound += checkCell(r-1, c-1);   // top left
+    minesFound += checkCell(r-1, c);    // top 
+    minesFound += checkCell(r-1, c+1);   // top right
+
+    // same row left and right
+    minesFound += checkCell(r, c-1);   // left 
+    minesFound += checkCell(r, c+1);   // right 
+
+    // 3 cells under target
+    minesFound += checkCell(r+1, c-1);  // under left
+    minesFound += checkCell(r+1, c);    // under 
+    minesFound += checkCell(r+1, c+1);  // under right
+
+    if (minesFound > 0) {
+        board[r][c].innerText = minesFound;
+        board[r][c].classList.add("x" + minesFound.toString());
+    }
+
+}
+
+function checkCell(r, c) {
+    if (r < 0 || r >= rows || c < 0 || c >= columns){
+        return 0;     // if out of bounds return/ cancel function
+    }
+    if (mineLocations.includes(r.toString() + "-" + c.toString())) {
+        return 1;
+    }
+    return 0;
+}
+
 
 // // flood fill = recursion (self call) from this function with limiter for revealed
 // function adjMines (evt) {

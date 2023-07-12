@@ -41,7 +41,7 @@ header {
     width: 6vmin;
     outline: 1px dashed navy;
     /* text */
-    font-size: 4vmin;
+    font-size: auto;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -54,7 +54,7 @@ header {
     color: transparent;
 } */
 
-.revealed {     /* also known as tile-clicked */
+.revealed {     /* also known as tile-clicked, not sure if using currently? */
     outline: 2px double rgb(50, 50, 150);
     background-color: rgb(21, 69, 109);
     color: rgb(222, 117, 25);

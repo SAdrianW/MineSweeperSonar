@@ -65,6 +65,8 @@ function initialise() {
 
     placeMines();
 
+    gameOver = false;
+
     // // create the board. would move to render board function, except variables within need to stay local
     for (let r = 0; r < rows; r++) {
         let row = [];
@@ -98,67 +100,6 @@ function placeMines() {
 }
 
 
-// // // Render: displays/ visualise the game to the DOM
-// // currently only being used for renderBoard, which is native to initialise.
-// function render() {
-// //     // console.log('ren-deng-deng-deng')
-//     renderBoard();
-// //     // renderTimer();
-// };
-
-// function renderBoard() {
-//     // // New renderBoard function starts with an empty array and fills it with divs and gives cells r-c co-ordinates as numbers
-//     for (let r = 0; r < rows; r++) {
-//         let row = [];
-//         for (let c = 0; c < columns; c++) {
-//             let cell = document.createElement('div');
-//             cell.id = r.toString() + '-' + c.toString();
-//             cell.addEventListener('click', sonarPing);
-//             document.getElementById('board').append(cell);
-//             row.push(cell);
-
-//         }
-//         board.push(row);
-//     }
-    
-    // // old version of renderBoard. worked with a pre-made 2d array. Added a hidden class to be changed to revealed class upon interaction
-//     board.forEach(function(colArr, colIdx) {
-//         colArr.forEach(function(cellVal, rowIdx) {
-//             const cellId = `r${rowIdx}c${colIdx}`;
-//             const cellEl = document.querySelector(`.${cellId}`);
-//             // console.log(cellEl);
-//             // cellEl.classList.remove("revealed"); //  put entire function in reset
-//             cellEl.classList.add("hidden"); // todo delete?
-//             // cellEl.innerText = ""; // this is/was a test finction. maybe needed later?
-//         });
-//     });
-// };
-
-// // function renderTimer() {
-
-// // };
-
-
-
-// function chooseMineLocations() { 
-//     let i = 0;
-//     while (i < minesTotal) {
-//         placeMine();
-//         i++;
-//         // console.log(placeMine)
-//     }
-// };
-
-
-// // let mineLocations;  // num = ^. randomCell (use Math.random row * collumn). While loop to iterate loops = ^
-// function placeMine() { 
-//     let rowIdx = Math.floor(Math.random() * (1, 4)); // 3 is hard code for diff. todo remove when diff options work
-//     let colIdx = Math.floor(Math.random() * (1, 4));
-//     let cellId = `r${rowIdx}c${colIdx}`;
-//     const cellEl = document.querySelector(`.${cellId}`);
-//     cellEl.innerText = 'X';
-//     // console.log(cellEl)
-// };
 
 function setFlag() {
     if (flagEnabled) {
@@ -204,16 +145,7 @@ function sonarPing(evt) {
     let c = parseInt(coords[1]);
     checkMine(r, c);
 
-    // // console.log(evt.target, 'ping'); // test
-    // evt.target.classList.remove('hidden');
-    // evt.target.classList.add('revealed');
-    
-    // // adjacent mines
-    // adjMines(evt);
-    
-    // render();
-    
-    // // EventTarget.class = visable;
+   
 };
 
 function revealMines() {
@@ -292,87 +224,13 @@ function checkCell(r, c) {
 }
 
 
-// // flood fill = recursion (self call) from this function with limiter for revealed
-// function adjMines (evt) {
-//     let cellId = evt.target.id; 
-//     cellId = cellId.split('');
-//     let row = Number(cellId[1]);
-//     let col = Number(cellId[3]);
-//     let numMines = 0;
-        
-//     let minRow = row - 1;
-//     let maxRow = row + 1;
-//     let minCol = col - 1;
-//     let maxCol = col + 1;
 
-//     if (minRow < 0) minRow = 0;
-//     if (maxRow >= board.length) maxRow = board.length - 1;
-//     if (minCol < 0) minCol = 0;
-//     if (maxCol >= board.length) maxCol = board.length - 1;
-
-
-//     for (let rowIdx = minRow; rowIdx <= maxRow; rowIdx++) {
-//         for (let colIdx = minCol; colIdx <= maxCol; colIdx++) {
-//             let candidate = document.querySelector(`#r${rowIdx}c${colIdx}`);
-//             if (candidate.innerText === 'X' && candidate !== evt.target) numMines++;
-//             // if (board[rowIdx][colIdx].innerText === 'X') count++;
-//         }
-//     }
-//     console.log(cellId, row, col);
-//     console.log(numMines);
-//     return numMines;
-// };
-
-
-
-
-// // ?O?  diffuculty. defaults to easy if nothing is picked
-// function diffChoice() {
-//     // difficulty = square if no 'click' detected. If click detected then use that result.
-//     return difficulty = 'test';
-
-// };
 
 function resetGame(evt) {
     // // new reset function, needs to remove board state
-    // board = [""]; // doesn't empty the board array in the same way that empty quotes would clear a string
-    
-    // // board creation "function" from initialise. was planning to reverse the process and .pop the divs, then realised a forEach loop might be better
-    // // function makes divs. splice removes divs
-    // for (let r = 0; r < rows; r++) {
-    //     let row = [];
-    //     for (let c = 0; c < columns; c++) {
-    //         let cell = document.createElement('div');
-    //         cell.id = r.toString() + '-' + c.toString();
-    //         cell.addEventListener('click', sonarPing);
-    //         document.getElementById('board').append(cell);
-    //         row.push(cell);
-
-    //     }
-    //     board.push(row);
-    // }
-    
-    // board.forEach(div.pop());
-    
-    // let r = board[0];
-    // let c = board[1];
-    
-    // let cell = board[""];
-    // let coords = cell.id.split("-");
-    // let r = parseInt(coords[0]);
-    // let c = parseInt(coords[1]);
-
-    // board.forEach(function clearBoard(r, c) {
-    //     for (let r = 0; r < rows; r++) {
-    //         let row = [];
-    //     for (let c = 0; c < columns; c++) {
-    //         board.pop(); 
-    //         }
-    //     }
-    // })
+    // // reset looks like it works but no new functions work.
 
     board.splice(0, Infinity); // removes all divs from board, but doesnt change the DOM
-        // once board is spliced, visuals/ DOM don't change but functions can't reference anything (init function disabled at time of writing this line)
     mineLocations.splice(0, Infinity); // removes all mines from board
     document.getElementById("board").classList.remove("revealed"); 
     document.getElementById("board").innerText = "";
@@ -382,21 +240,6 @@ function resetGame(evt) {
     console.log('game reset');
 };
 
-// ?O? if reset doesn't work use center slot in header for flag count
-
-
-
-// // contents of old reset function
-// board.forEach(function(colArr, colIdx) {
-//     colArr.forEach(function(cellVal, rowIdx) {
-//         const cellId = `r${rowIdx}c${colIdx}`;
-//         const cellEl = document.querySelector(`.${cellId}`);
-//         cellEl.classList.remove("revealed"); 
-//         cellEl.innerText = ""; // this is/was a test finction. maybe needed later?
-// // reset: may not add hiddem class. or may add second. currently hard coded html
-// // might need to move hidden to init function.
-//     });
-// });
 
 
 

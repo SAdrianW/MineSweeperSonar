@@ -57,14 +57,14 @@ header {
 .revealed {     /* also known as tile-clicked, not sure if using currently? */
     outline: 2px double rgb(50, 50, 150);
     background-color: rgb(21, 69, 109);
-    color: rgb(222, 117, 25);
+    /* color: rgb(222, 117, 25);
     text-align: center;
-    font-size: 8vmin;
+    font-size: 8vmin; */
 }
 
 
 .x1 {
-    color: blue;
+    color: yellow;
 }
 
 .x2 {

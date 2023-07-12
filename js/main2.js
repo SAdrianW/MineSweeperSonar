@@ -213,6 +213,12 @@ function checkMine(r, c) {
     if (r < 0 || r >= rows || c < 0 || c >= columns){
         return;     // if out of bounds return/ cancel function
     }
+    if (board[r][c].classList.contains("revealed")){
+        return;
+    }
+
+    board[r][c].classList.add("revealed");
+
     let minesFound = 0;
 
     // 3 cells above target
@@ -233,7 +239,21 @@ function checkMine(r, c) {
         board[r][c].innerText = minesFound;
         board[r][c].classList.add("x" + minesFound.toString());
     }
+    else {
+        // 3 cells above
+        checkMine(r-1, c-1);    // top left
+        checkMine(r-1, c);      // top 
+        checkMine(r-1, c+1);    // top right
 
+        // same row
+        checkMine(r, c-1);    // left
+        checkMine(r, c+1);    // right
+
+        // 3 cells under
+        checkMine(r+1, c-1);    // under left
+        checkMine(r+1, c);      // under 
+        checkMine(r+1, c+1);    // under right
+    }
 }
 
 function checkCell(r, c) {

@@ -22,7 +22,7 @@ let difficulty;     // ? Optional ? easy, med or hard
 
 let mineLocations = [];     // array holding random mine locations
 
-let tilesRevealed = 0;      // goal of game is to click all tile minus mine tiles
+let cellsRevealed = 0;      // goal of game is to click all tile minus mine tiles
 
 let flagEnabled = false;    // when true enables placing of flags rather then revealing of tiles. Toggle is more mobile friendly compared to using right click event listener
 
@@ -158,6 +158,9 @@ function setFlag() {
 }
 
 function sonarPing(evt) {
+    if (gameOver || this.classList.contains("revealed")) {
+        return;
+    }
 
     let cell = this;    
     if (flagEnabled) {      // handles placing/ removing of flags
@@ -218,6 +221,7 @@ function checkMine(r, c) {
     }
 
     board[r][c].classList.add("revealed");
+    cellsRevealed += 1;
 
     let minesFound = 0;
 
@@ -253,6 +257,11 @@ function checkMine(r, c) {
         checkMine(r+1, c-1);    // under left
         checkMine(r+1, c);      // under 
         checkMine(r+1, c+1);    // under right
+    }
+
+    if (cellsRevealed === rows * columns - minesTotal) {
+        document.getElementById("remaining-mines").innerText = "Cleared";
+        gameOver = true;
     }
 }
 

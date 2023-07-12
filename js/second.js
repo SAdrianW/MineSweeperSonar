@@ -9,12 +9,16 @@
 
 
 // TODO
-// flood fill
-// win logic
+// reset
+// dificulty
+// timer
 // visuals
+// flag count
+// better game over message
+// comments: general and re-factor
 
 // ?O?
-// diffuculty levels
+// 
 // audio
 // 
 // cone
@@ -23,6 +27,7 @@
 
 
 
+// these are pseudocode attempts at writing various functions.
 
 // on click if cell is empty (null) ; 
 // Check adjacent (adj) cells for mines: 	
@@ -53,17 +58,17 @@
 // display total as text on target cell -> not that hard. cellId.innerText=('N')
 
 
-let adjCells = [
-    [0, 1, 2],
-    [3, T, 5],
-    [6, 7, 8]
-];
+// let adjCells = [
+//     [0, 1, 2],
+//     [3, T, 5],
+//     [6, 7, 8]
+// ];
 
-let adjExample = [
-    ['r0c1', 'r0c2', 'r0c3'],
-    ['r1c1',    T, 'r1c3'],
-    ['r2c1', 'r2c2', 'r2c3'],
-];
+// let adjExample = [
+//     ['r0c1', 'r0c2', 'r0c3'],
+//     ['r1c1',    T, 'r1c3'],
+//     ['r2c1', 'r2c2', 'r2c3'],
+// ];
 
 // NW id = r-1, c-1     N id = r-1 c===     NE id = r-1 c+1
 // W id = r===, c-1     TARGET r1c2         E id = r=== c+1
@@ -72,6 +77,8 @@ let adjExample = [
 
 
 
+
+// The code below was borrowed from the address to help build out my initial version of the adjacent mines counting function
 // https://stackoverflow.com/questions/66806921/minesweeper-problem-to-recover-the-mines-adjacent-to-a-tile
 
 // function getAdjacentMines(row, col) {   // name is self explanatory
@@ -116,9 +123,9 @@ let adjExample = [
 
 
 
-
+// these two are older versions of functions that were phased out as methodology changed or better syntax was developed
 // forEach(checkMines(evt){
-//     if (evt.target === 'X') return;
+//     if (evt.target === 'X') return;      
 //     } else {
 //         adjMines() 
 //     }

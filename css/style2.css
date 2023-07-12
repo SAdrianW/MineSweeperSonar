@@ -48,21 +48,21 @@ header {
 
 }
 
-/* not needed anymore, being rolled into default state */
+/* not needed anymore, re-factored into default state */
 /* .hidden {
     outline: 2px dotted navy;
     color: transparent;
 } */
 
-.revealed {     /* also known as tile-clicked, not sure if using currently? */
-    outline: 2px double rgb(50, 50, 150);
+.revealed {     /* cells gain this class when clicked */
+    /* outline: 2px double rgb(50, 50, 150); */
     background-color: rgb(21, 69, 109);
     /* color: rgb(222, 117, 25);
     text-align: center;
     font-size: 8vmin; */
 }
 
-
+/* text colours for adjacent mine warnings */
 .x1 {
     color: yellow;
 }

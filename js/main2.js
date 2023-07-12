@@ -18,15 +18,15 @@ let board = [];      // array; square (or cone if enough time)
 
 let timer;      // counts time taken from first click. timer element that always starts at 0, counts up as time passes while result = inGame
 
-let difficulty;     // ? Optional ? easy, med or hard
+let difficulty;     // ? Optional ? easy, med or hard. set to 'easySquare' then change with eventListener?
 
 let mineLocations = [];     // array holding random mine locations
 
-let cellsRevealed = 0;      // goal of game is to click all tile minus mine tiles
+let cellsRevealed = 0;      // goal of game is to click all cells minus mine cells, changes gameOver
 
-let flagEnabled = false;    // when true enables placing of flags rather then revealing of tiles. Toggle is more mobile friendly compared to using right click event listener
+let flagEnabled = false;    // when true enables placing of flags rather then revealing of cells. Toggle is more mobile friendly compared to using right click event listener
 
-let gameOver = false;       // changes to true when mine clicked
+let gameOver = false;       // changes to true when mine clicked, or cellsRevealed
 
 let minesTotal;
 
@@ -43,9 +43,10 @@ const flagBtn = document.getElementById('flag-btn');
 
 /*------ Event Listeners ------*/
 // document.getElementById('board').addEventListener('click', sonarPing); // player choice of cell selection
+        // event listener re-factored into function to prevent turning entire board into single cell when any single cell was clicked.
 
 // document.getElementById('diff-options').addEventListener('click', diffChoice);
-// document.querySelector('.reset').addEventListener('click', resetGame);
+document.querySelector('.reset').addEventListener('click', resetGame);
 
 /*------ Functions ------*/
 
@@ -54,7 +55,7 @@ initialise();
 
 function initialise() {
     // rotate 90deg counter-clockwise to visualise to DOM?
-    difficulty = 'easySquare'; // hard code for testing. todo remove when diff options work
+    difficulty = 'easySquare'; // hard code for testing. todo remove when diff options work. defaults to easy
     minesTotal = DIFFICULTY_LVL[difficulty].mines
     rows = DIFFICULTY_LVL[difficulty].rows
     columns = DIFFICULTY_LVL[difficulty].columns
@@ -62,8 +63,9 @@ function initialise() {
     document.getElementById('remaining-mines').innerText = minesTotal;
     document.getElementById('flag-btn').addEventListener('click', setFlag);
 
-    placeMines()
-    // create the board. TODO move to render board
+    placeMines();
+
+    // // create the board. would move to render board function, except variables within need to stay local
     for (let r = 0; r < rows; r++) {
         let row = [];
         for (let c = 0; c < columns; c++) {
@@ -77,12 +79,8 @@ function initialise() {
         board.push(row);
     }
 
-
-
-
     // timer = 0;       // TODO: implement timer
-    // chooseMineLocations();
-    // render();
+    // render(); // not using currently. game works without it. don't want to break things by moving them too much
 };
 
 function placeMines() {
@@ -101,13 +99,29 @@ function placeMines() {
 
 
 // // // Render: displays/ visualise the game to the DOM
+// // currently only being used for renderBoard, which is native to initialise.
 // function render() {
-//     // console.log('ren-deng-deng-deng')
+// //     // console.log('ren-deng-deng-deng')
 //     renderBoard();
-//     // renderTimer();
+// //     // renderTimer();
 // };
 
 // function renderBoard() {
+//     // // New renderBoard function starts with an empty array and fills it with divs and gives cells r-c co-ordinates as numbers
+//     for (let r = 0; r < rows; r++) {
+//         let row = [];
+//         for (let c = 0; c < columns; c++) {
+//             let cell = document.createElement('div');
+//             cell.id = r.toString() + '-' + c.toString();
+//             cell.addEventListener('click', sonarPing);
+//             document.getElementById('board').append(cell);
+//             row.push(cell);
+
+//         }
+//         board.push(row);
+//     }
+    
+    // // old version of renderBoard. worked with a pre-made 2d array. Added a hidden class to be changed to revealed class upon interaction
 //     board.forEach(function(colArr, colIdx) {
 //         colArr.forEach(function(cellVal, rowIdx) {
 //             const cellId = `r${rowIdx}c${colIdx}`;
@@ -157,6 +171,9 @@ function setFlag() {
     }
 }
 
+
+// // sonarPing: responds to user interaction. (probably not the best name, but it is on theme)
+// // Has built in event listener.
 function sonarPing(evt) {
     if (gameOver || this.classList.contains("revealed")) {
         return;
@@ -166,15 +183,17 @@ function sonarPing(evt) {
     if (flagEnabled) {      // handles placing/ removing of flags
         if(cell.innerText === '') {
             cell.innerText = 'F';
+            cell.style.color = 'greenyellow';
         } 
         else if (cell.innerText === 'F') {
             cell.innerText = '';
+            cell.style.color = 'black';
         }
         return;
     }
 
     if (mineLocations.includes(cell.id)) {  // handles clicking on a mine and ending the game
-        // alert("GAME OVER!");
+        alert("GAME OVER!");
         gameOver = true;
         revealMines();
         return;
@@ -196,9 +215,6 @@ function sonarPing(evt) {
     
     // // EventTarget.class = visable;
 };
-// // sonarPing: responds to user interaction. (probably not the best name, but it is on theme)
-// // guard: if (evt.target.tagName !== 'CELL') return; // this should prevent clicks from happening "out of bounds"
-//                       // ^ or className, if that works
 
 function revealMines() {
     for (let r = 0; r < rows; r++) {
@@ -317,18 +333,70 @@ function checkCell(r, c) {
 
 // };
 
-// function resetGame(evt) {
-//     board.forEach(function(colArr, colIdx) {
-//         colArr.forEach(function(cellVal, rowIdx) {
-//             const cellId = `r${rowIdx}c${colIdx}`;
-//             const cellEl = document.querySelector(`.${cellId}`);
-//             cellEl.classList.remove("revealed"); 
-//             cellEl.innerText = ""; // this is/was a test finction. maybe needed later?
-//         });
-//     });
-//     initialise(); 
-//     console.log('game reset');
-// };
-// // I think the reset function is fully working. Ignore below comments, unless it isn't
+function resetGame(evt) {
+    // // new reset function, needs to remove board state
+    // board = [""]; // doesn't empty the board array in the same way that empty quotes would clear a string
+    
+    // // board creation "function" from initialise. was planning to reverse the process and .pop the divs, then realised a forEach loop might be better
+    // // function makes divs. splice removes divs
+    // for (let r = 0; r < rows; r++) {
+    //     let row = [];
+    //     for (let c = 0; c < columns; c++) {
+    //         let cell = document.createElement('div');
+    //         cell.id = r.toString() + '-' + c.toString();
+    //         cell.addEventListener('click', sonarPing);
+    //         document.getElementById('board').append(cell);
+    //         row.push(cell);
+
+    //     }
+    //     board.push(row);
+    // }
+    
+    // board.forEach(div.pop());
+    
+    // let r = board[0];
+    // let c = board[1];
+    
+    // let cell = board[""];
+    // let coords = cell.id.split("-");
+    // let r = parseInt(coords[0]);
+    // let c = parseInt(coords[1]);
+
+    // board.forEach(function clearBoard(r, c) {
+    //     for (let r = 0; r < rows; r++) {
+    //         let row = [];
+    //     for (let c = 0; c < columns; c++) {
+    //         board.pop(); 
+    //         }
+    //     }
+    // })
+
+    board.splice(0, Infinity); // removes all divs from board, but doesnt change the DOM
+        // once board is spliced, visuals/ DOM don't change but functions can't reference anything (init function disabled at time of writing this line)
+    mineLocations.splice(0, Infinity); // removes all mines from board
+    document.getElementById("board").classList.remove("revealed"); 
+    document.getElementById("board").innerText = "";
+
+
+    initialise(); 
+    console.log('game reset');
+};
+
+// ?O? if reset doesn't work use center slot in header for flag count
+
+
+
+// // contents of old reset function
+// board.forEach(function(colArr, colIdx) {
+//     colArr.forEach(function(cellVal, rowIdx) {
+//         const cellId = `r${rowIdx}c${colIdx}`;
+//         const cellEl = document.querySelector(`.${cellId}`);
+//         cellEl.classList.remove("revealed"); 
+//         cellEl.innerText = ""; // this is/was a test finction. maybe needed later?
 // // reset: may not add hiddem class. or may add second. currently hard coded html
 // // might need to move hidden to init function.
+//     });
+// });
+
+
+

@@ -11,7 +11,7 @@ body {
     align-items: center;
     background-color: #2891ac;
     text-align: center;
-    background-image: url(/images/ocean-waves.png);
+    background-image: url("../images/ocean-waves.png");
     background-repeat: no-repeat;
     background-size: cover;
     /* overflow: hidden;  this disables scrolling   */
@@ -29,7 +29,7 @@ header {
 }
 
 .image-mine {
-    background-image: url(/images/typhon-class.png);
+    background-image: url("../images/typhon-class.png");
     background-size: contain;
     z-index: 9;
     background-repeat: no-repeat;
@@ -37,7 +37,7 @@ header {
 }
 
 .image-sonar {
-    background-image: url(/images/radar-glow.png);
+    background-image: url("../images/radar-glow.png");
     background-size: contain;
     z-index: 9;
     background-repeat: no-repeat;
@@ -189,9 +189,11 @@ infinite;
     border: none;
     color: rgb(255, 0, 0);
     text-shadow: 1px 1px 2px black, 2px 2px 4px whi;
-    background-image: url(/images/thick-stripes.png);
+    background-image: url("../images/thick-stripes.png");
     background-size: 120px 50px;
 }
+
+/* Note on displaying img as background for buttons: Make sure the img is of similar shape. I tried to use an img with transparent sides and it didn't display well */
 
 button:hover {
     border: 4px solid rgb(255, 150, 0);

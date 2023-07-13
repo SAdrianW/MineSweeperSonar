@@ -9,21 +9,102 @@
 
 
 // TODO post MVP
-//      reset - done
 //      dificulty - too hard basket/ not enough time
 //      timer - ran out of time to figure this out (the irony is not lost to me here)
-// visuals; remove vmin units
 // flag count
-// better game over message
 // comments: general and re-factor
+
+
+//      DONE!!!
+//  reset - done
+//  visuals; remove vmin units
+//  better game over message
+
 
 // ?O?
 // 
 // audio
-// 
 // cone
 
 
+
+
+
+// HTML to be returned later
+//      goes into header under div class info-box
+<!-- <div class="time-box time info">
+<h2 class="timer time info">Timer</h2>
+<h4 class="time info timer-display" id="time-taken">0</h4>
+<div class="countUp time info"></div>
+</div> -->
+
+//      under h4 id remaining mines
+<!-- <div class="mine-count mine info"></div> -->
+
+
+//      under flag btn
+<!-- <h4 class="flags" id="flags-placed">0</h4> -->
+<!-- ^ to be used to count flags on field. maybe even limit amount -->
+
+
+//      footer contents
+<!-- <div class="diff-box diff">
+            <h3 class="diff-title diff">Choose your battle:</h3>
+            <div class="diff-options diff">
+                <button class="easySquare-btn diff" id="easySquare">Easy Square</button>
+                <button class="medSquare-btn diff" id="medSquare" >Medium Square</button>
+                <button class="hardSquare-btn diff" id="hardSquare">Hard Square</button>
+                <button class="easySnr-btn diff">Easy Sonar</button>
+                <button class="medSnr-btn diff">Medium Sonar</button>
+                <button class="hardSnr-btn diff">Hard Sonar</button> 
+            these will be returned at a much later date
+            </div>
+        </div> -->
+
+
+//  JS to be returned
+
+        // State vars
+// let flagsUsed;           // put back in later if time
+
+
+        // Cache
+// const diffSelection = document.getElementById(diffChoice);
+
+
+        // Event Listeners
+// document.getElementById('board').addEventListener('click', sonarPing); // player choice of cell selection
+        // event listener re-factored into function to prevent turning entire board into single cell when any single cell was clicked.
+
+// document.querySelector('.diff-options').addEventListener('click', diffChoice);
+
+
+        // Functions
+            // Init between last and 2nd last }       
+// document.getElementById('board').addEventListener('click', sonarPing); // player choice of cell selection
+        // event listener re-factored into function to prevent turning entire board into single cell when any single cell was clicked.
+
+// document.querySelector('.diff-options').addEventListener('click', diffChoice);
+
+
+// function diffChoice(evt) {
+//     console.log(evt.target.id);
+//     let difficulty = evt.target.id.toString();
+//     return difficulty;
+// }
+
+
+            // sonarPing    
+// countFlags();   // used to count total flgs on field
+
+
+// function countFlags() {      // not giving a number at the end, just an array or object of HTML
+//     flagsUsed = board.reduce((acc,flag) => {
+//         acc[flag] = acc[flag] ? acc[flag] +1 : 1;
+//         return acc;
+//     }, []);
+//     console.log(flagsUsed.toString())
+// };
 
 
 

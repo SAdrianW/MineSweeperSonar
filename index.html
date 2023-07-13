@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="css/style2.css" rel="stylesheet" type="text/css" />
     <script defer src="js/main2.js"></script>
-    <title>MineSweeper Sonar Mk.II</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=VT323&display=swap" rel="stylesheet">
+    <title>SonarSweeper</title>
 </head>
 
 
@@ -14,22 +17,14 @@
     <header>
         
         <h1 aria-label="SonarSweeper"></h1>
-        <!-- both h2 els to be replaced with icons/ counters -->
         <h2 id="message"></h2>
         <div class="info-box info"> 
-            <!-- <div class="time-box time info">
-                <h2 class="timer time info">Timer</h2>
-                <h4 class="time info timer-display" id="time-taken">0</h4>
-                <div class="countUp time info"></div>
-            </div> -->
 
             <button class="reset info">Reset</button>
 
             <div class="mine-box mine info">
                 <h2 class="remaining mine info">Submarines</h2>
-                <h4 class="mine info" id="remaining-mines">0</h4> 
-                <!-- hard coded ^ to 0. changes per diff in js -->
-                <!-- <div class="mine-count mine info"></div> -->
+                <h4 class="mine info" id="remaining-mines">0</h4>   <!-- hard coded to 0. changes per diff in js -->  
             </div>
 
 
@@ -43,23 +38,10 @@
 
     <div class="flags">
         <button class="flags" id="flag-btn">Flag</button>
-        <!-- <h4 class="flags" id="flags-placed">0</h4> -->
-        <!-- ^ to be used to count flags on field. maybe even limit amount -->
     </div>
 
     <footer>
-        <!-- <div class="diff-box diff">
-            <h3 class="diff-title diff">Choose your battle:</h3>
-            <div class="diff-options diff">
-                <button class="easySquare-btn diff" id="easySquare">Easy Square</button>
-                <button class="medSquare-btn diff" id="medSquare" >Medium Square</button>
-                <button class="hardSquare-btn diff" id="hardSquare">Hard Square</button>
-                <button class="easySnr-btn diff">Easy Sonar</button>
-                <button class="medSnr-btn diff">Medium Sonar</button>
-                <button class="hardSnr-btn diff">Hard Sonar</button> 
-            these will be returned at a much later date
-            </div> -->
-        </div>
+        
     </footer>
 
 </body>

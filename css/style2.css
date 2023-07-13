@@ -4,7 +4,7 @@
 
 body {
     /* height: 100vh; */
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-family: 'Share Tech Mono', monospace;    
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -35,6 +35,16 @@ header {
     background-repeat: no-repeat;
     background-position: center;
 }
+
+.image-sonar {
+    background-image: url(/images/radar-glow.png);
+    background-size: contain;
+    z-index: 9;
+    background-repeat: no-repeat;
+    background-position: center;
+    color: transparent;
+}
+
 
 h1 {
     position: relative;
@@ -158,7 +168,7 @@ infinite;
     justify-content: space-between;
     align-items: center;
     column-gap: 15px;
-    font-size: 20px;
+    font-size: 25px;
     margin: 20px;
     height: 80px;
     color: limegreen;
@@ -167,18 +177,26 @@ infinite;
 }
 
 .reset {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     margin: 25px;
-    width: 80px;
-    height: 40px;
-    font-size: 20px;
+    width: 100px;
+    height: 50px;
+    font-size: 25px;
+    font-family: 'Share Tech Mono', monospace;
     background-color: lightgrey;
     border: none;
-    color: rgb(220, 0, 0);
-    background-image: url(/images/hazard-stripes.png);
-    background-size: 80px 40px;                           /*  HELP!!!   */
-
+    color: rgb(255, 0, 0);
+    text-shadow: 1px 1px 2px black, 2px 2px 4px whi;
+    background-image: url(/images/thick-stripes.png);
+    background-size: 120px 50px;
 }
 
+button:hover {
+    border: 4px solid rgb(255, 150, 0);
+    box-shadow: 6px 3px 4px #dcb010;
+}
 
 #remaining-mines {
     font-size: 25px;
@@ -199,7 +217,7 @@ infinite;
     width: 60px;
     outline: 1px dashed navy;
     /* text */
-    font-size: auto;
+    font-size: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -217,7 +235,7 @@ infinite;
 }
 
 .x2 {
-    color: green;
+    color: rgb(21, 152, 21);
 }
 
 .x3 {
@@ -225,7 +243,7 @@ infinite;
 }
 
 .x4 {
-    color: purple;
+    color: rgb(176, 0, 176);
 }
 
 .x5 {
@@ -233,15 +251,15 @@ infinite;
 }
 
 .x6 {
-    color: teal;
+    color: rgb(0, 229, 245);
 }
 
 .x7 {
-    color: darkorchid;
+    color: rgb(170, 57, 227);
 }
 
 .x8 {
-    color:hotpink
+    color:rgb(255, 92, 173)
 }
 
 #flag-btn {
@@ -249,13 +267,10 @@ infinite;
     width: 80px;
     height: 40px;
     font-size: 20px;
+    font-family: 'Share Tech Mono', monospace;
     background-color: lightgrey;
     border: none;
     text-shadow: 1px 1px 2px darkgreen, 3px 3px 6px green;
-}
-
-h3 {
-    text-align: center;
 }
 
 #flag-btn:hover {
@@ -263,9 +278,10 @@ h3 {
 
 }
 
-button:hover {
-    border: 2px solid gold;
+h3 {
+    text-align: center;
 }
+
 
 footer {
     width: 60vmin;

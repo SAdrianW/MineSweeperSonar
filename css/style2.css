@@ -14,13 +14,14 @@ body {
     background-image: url(/images/ocean-waves.png);
     background-repeat: no-repeat;
     background-size: cover;
-    overflow: hidden;
+    /* overflow: hidden;  this disables scrolling   */
 }
 
 header {
-    margin-top: 200px;
-    padding-top: 100px;
-    /* display: flex; */
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    padding-top: 50px;
     justify-content: center;
     align-items: center;
     text-align: center;
@@ -32,6 +33,7 @@ header {
     background-size: contain;
     z-index: 9;
     background-repeat: no-repeat;
+    background-position: center;
 }
 
 h1 {

@@ -3,17 +3,18 @@
 }
 
 body {
-    height: 100vh;
+    /* height: 100vh; */
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    /* background-color: #2891ac; */
+    background-color: #2891ac;
     text-align: center;
     background-image: url(/images/ocean-waves.png);
     background-repeat: no-repeat;
     background-size: cover;
+    overflow: hidden;
 }
 
 header {
@@ -23,18 +24,129 @@ header {
     justify-content: center;
     align-items: center;
     text-align: center;
-    color: limegreen;
+    /* color: limegreen; */
+}
+
+.image-mine {
+    background-image: url(/images/typhon-class.png);
+    background-size: contain;
+    z-index: 9;
+    background-repeat: no-repeat;
 }
 
 h1 {
+    position: relative;
     font-size: 60px;
+    margin: 20px;
+    perspective: 100px;
+    color: limegreen;
+    text-shadow: 1px 1px 2px black, 3px 3px 6px darkgreen, 8px 8px 12px green;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+
+h1::before,
+h1::after {
+    content: attr(aria-label);
+    position: absolute;
+    top: 0;
+    left: 20;
+    transform: translate(-50%, -50%);
+    text-shadow: 2px 2px 2px rgba(10, 150, 5, 0.6);
+}
+
+h1::before {
+    animation: floatAbove 3.5s ease-in-out infinite;
+    -webkit-clip-path: polygon(0% 0%, 100% 0%, 100% 50%, 0% 50%);
+            clip-path: polygon(0% 0%, 100% 0%, 100% 50%, 0% 50%);
+}
+
+h1::after {
+    opacity: 0.65;
+    filter: blur(0.02em);
+    transform: translate(-50%, -50%) rotateX(21deg);
+    animation: floatBelow 3.5s ease-in-out infinite;
+    -webkit-clip-path: polygon(0% 50%, 100% 50%, 100% 100%, 0% 100%);
+            clip-path: polygon(0% 50%, 100% 50%, 100% 100%, 0% 100%);
+}
+
+@keyframes floatAbove {
+    50% {
+        transform: translate(-50%, -60%);
+        -webkit-clip-path: polygon(0% 0%, 100% 0%, 100% 60%, 0% 60%);
+                clip-path: polygon(0% 0%, 100% 0%, 100% 60%, 0% 60%);
+    }
+}
+
+@keyframes floatBelow {
+    50% {
+        transform: translate(-50%, -60%) rotateX(10deg);
+        -webkit-clip-path: polygon(0% 60%, 100% 60%, 100% 100%, 0% 100%);
+                clip-path: polygon(0% 60%, 100% 60%, 100% 100%, 0% 100%);
+    }
+}
+
+
+#message { /*  win/loss message  */
+    font-size: 40px;
     margin: 20px;
 }
 
-#message {
-    font-size: 40px;
+.victory-msg {
     margin: 20px;
+    text-align: center;
+    text-transform: uppercase;
+    background-image: linear-gradient(
+    -225deg,
+    #4a5b5f 0%,
+    #ff6f3c 29%,
+    #ff9a3c 67%,
+    #ffc93c 100%
+  );
+  background-size: auto auto;
+  background-clip: border-box;
+  background-size: 50% auto;
+  color:#53a8b6 ;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: 
+  transparent;
+    animation: textclip 2s linear 
+infinite;
+  display: inline-block;
+      font-size: 20px;
+}
 
+.defeat-msg {
+    margin: 20px;
+    text-align: center;
+    text-transform: uppercase;
+    background-image: linear-gradient(
+    -225deg,
+    #155263 0%,
+    #e79d26 29%,
+    #ca6e18 67%,
+    #f10909 100%
+  );
+  background-size: auto auto;
+  background-clip: border-box;
+  background-size: 50% auto;
+  color:#53a8b6 ;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: 
+  transparent;
+    animation: textclip 2s linear 
+infinite;
+  display: inline-block;
+      font-size: 20px;
+}
+
+@keyframes textclip {
+  to {
+    background-position: 100% center;
+  }
 }
 
 
@@ -47,6 +159,9 @@ h1 {
     font-size: 20px;
     margin: 20px;
     height: 80px;
+    color: limegreen;
+    text-shadow: 1px 1px 2px black, 3px 3px 6px darkgreen, 8px 8px 12px green;
+
 }
 
 .reset {
@@ -57,6 +172,9 @@ h1 {
     background-color: lightgrey;
     border: none;
     color: rgb(220, 0, 0);
+    background-image: url(/images/hazard-stripes.png);
+    background-size: 80px 40px;                           /*  HELP!!!   */
+
 }
 
 
@@ -131,6 +249,7 @@ h1 {
     font-size: 20px;
     background-color: lightgrey;
     border: none;
+    text-shadow: 1px 1px 2px darkgreen, 3px 3px 6px green;
 }
 
 h3 {

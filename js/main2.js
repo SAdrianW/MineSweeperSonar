@@ -148,7 +148,8 @@ function sonarPing(evt) {
     if (mineLocations.includes(cell.id)) {  // handles clicking on a mine and ending the game
         // alert("GAME OVER!");    // need to change. Gamaliel suggested adding a CSS class and <h1> to the title.
         gameOver = true;
-        gameMsg.innerText = "Defeat!"
+        gameMsg.innerText = "Defeat!";
+        gameMsg.classList.add("defeat-msg");
         revealMines();
 
         return;
@@ -168,8 +169,9 @@ function revealMines() {
         for (let c = 0; c < columns; c++){
             let cell = board[r][c];
             if (mineLocations.includes(cell.id)) {
-                cell.innerText = "BOOM"                     // mines go BOOM
-                cell.style.backgroundColor = "orangered"
+                // cell.innerText = "BOOM"                     // mines go BOOM
+                cell.style.backgroundColor = "orangered";
+                cell.classList.add("image-mine");
             }
         }
     }
@@ -225,7 +227,8 @@ function checkMine(r, c) {
 
     if (cellsRevealed === rows * columns - minesTotal) {
         document.getElementById("remaining-mines").innerText = "Cleared";
-        gameMsg.innerText = 'VICTORY!'
+        gameMsg.innerText = 'VICTORY!';
+        gameMsg.classList.add("victory-msg");
         gameOver = true;
     }
 }

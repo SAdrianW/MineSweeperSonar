@@ -8,11 +8,11 @@
 
 
 
-// TODO
-// reset
-// dificulty
-// timer
-// visuals
+// TODO post MVP
+//      reset - done
+//      dificulty - too hard basket/ not enough time
+//      timer - ran out of time to figure this out (the irony is not lost to me here)
+// visuals; remove vmin units
 // flag count
 // better game over message
 // comments: general and re-factor
@@ -314,3 +314,21 @@
 // // might need to move hidden to init function.
 //     });
 // });
+
+
+
+
+
+
+// OLD CSS GRAVEYARD
+
+/* not needed anymore, re-factored into default state */
+/* .hidden {
+    outline: 2px dotted navy;
+    color: transparent;
+} */
+
+
+
+
+

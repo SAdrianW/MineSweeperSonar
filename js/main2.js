@@ -1,12 +1,12 @@
 /*------ Constants ------*/
 const DIFFICULTY_LVL = {
-    easy: {mines: 10, rows: 9, columns: 19},
-    med: {mines: 40, rows: 15, columns: 31},
-    hard: {mines: 99 , rows: 21, columns: 43},
+    // easy: {mines: 10, rows: 9, columns: 19},
+    // med: {mines: 40, rows: 15, columns: 31},
+    // hard: {mines: 99 , rows: 21, columns: 43},
     easySquare: {mines: 10, rows: 10, columns: 10},
-    medSquare: {mines: 40, rows: 16, columns: 16},
-    hardSquare: {mines: 99, rows: 16, columns: 30},
-    test: {mines: 3, rows: 4, columns: 4}
+    // medSquare: {mines: 40, rows: 16, columns: 16},
+    // hardSquare: {mines: 99, rows: 16, columns: 30},
+    // test: {mines: 3, rows: 4, columns: 4}
 };
 // Will always reference at least square.
 
@@ -16,7 +16,7 @@ const DIFFICULTY_LVL = {
 /*------ State Variables ------*/
 let board = [];      // array; square (or cone if enough time)
 
-let timer;      // counts time taken from first click. timer element that always starts at 0, counts up as time passes while result = inGame
+let timer;      // counts time taken from first click. timer element that always starts at 0, counts up as time passes while gameOver = false
 
 let difficulty;     // ? Optional ? easy, med or hard. set to 'easySquare' then change with eventListener?
 
@@ -34,19 +34,24 @@ let rows;
 
 let columns;
 
+// let flagsUsed;           // put back in later if time
+
 /*------ Cached Elements ------*/
 // Elements to be accessed repeatedly. saved here for efficency
 
 const resetBtn = document.getElementById('reset');
 const flagBtn = document.getElementById('flag-btn');
+let gameMsg = document.getElementById('message');
 // const diffSelection = document.getElementById(diffChoice);
 
 /*------ Event Listeners ------*/
 // document.getElementById('board').addEventListener('click', sonarPing); // player choice of cell selection
         // event listener re-factored into function to prevent turning entire board into single cell when any single cell was clicked.
 
-// document.getElementById('diff-options').addEventListener('click', diffChoice);
+// document.querySelector('.diff-options').addEventListener('click', diffChoice);
+
 document.querySelector('.reset').addEventListener('click', resetGame);
+
 
 /*------ Functions ------*/
 
@@ -59,6 +64,7 @@ function initialise() {
     minesTotal = DIFFICULTY_LVL[difficulty].mines
     rows = DIFFICULTY_LVL[difficulty].rows
     columns = DIFFICULTY_LVL[difficulty].columns
+    gameMsg.innerText = '';
     
     document.getElementById('remaining-mines').innerText = minesTotal;
     document.getElementById('flag-btn').addEventListener('click', setFlag);
@@ -82,6 +88,8 @@ function initialise() {
     }
 
     // timer = 0;       // TODO: implement timer
+                    // Implimentation: start timer on sonarPing, end timer when gameOver = true
+
     // render(); // not using currently. game works without it. don't want to break things by moving them too much
 };
 
@@ -99,7 +107,11 @@ function placeMines() {
     }
 }
 
-
+// function diffChoice(evt) {
+//     console.log(evt.target.id);
+//     let difficulty = evt.target.id.toString();
+//     return difficulty;
+// }
 
 function setFlag() {
     if (flagEnabled) {
@@ -124,19 +136,21 @@ function sonarPing(evt) {
     if (flagEnabled) {      // handles placing/ removing of flags
         if(cell.innerText === '') {
             cell.innerText = 'F';
-            cell.style.color = 'greenyellow';
+            cell.style.color = 'greenyellow'; // change to img, no need for font colour
         } 
         else if (cell.innerText === 'F') {
             cell.innerText = '';
-            cell.style.color = 'black';
+            cell.classList.add("x" + minesFound.toString()); // change to .x# class or comment?
         }
         return;
     }
 
     if (mineLocations.includes(cell.id)) {  // handles clicking on a mine and ending the game
-        alert("GAME OVER!");
+        // alert("GAME OVER!");    // need to change. Gamaliel suggested adding a CSS class and <h1> to the title.
         gameOver = true;
+        gameMsg.innerText = "Defeat!"
         revealMines();
+
         return;
     }
 
@@ -145,6 +159,7 @@ function sonarPing(evt) {
     let c = parseInt(coords[1]);
     checkMine(r, c);
 
+    // countFlags();
    
 };
 
@@ -153,7 +168,7 @@ function revealMines() {
         for (let c = 0; c < columns; c++){
             let cell = board[r][c];
             if (mineLocations.includes(cell.id)) {
-                cell.innerText = "BOOM"
+                cell.innerText = "BOOM"                     // mines go BOOM
                 cell.style.backgroundColor = "orangered"
             }
         }
@@ -165,13 +180,14 @@ function checkMine(r, c) {
         return;     // if out of bounds return/ cancel function
     }
     if (board[r][c].classList.contains("revealed")){
-        return;
+        return;     // doesn't check revealed cells and ends recursion
     }
 
     board[r][c].classList.add("revealed");
     cellsRevealed += 1;
 
     let minesFound = 0;
+
 
     // 3 cells above target
     minesFound += checkCell(r-1, c-1);   // top left
@@ -209,6 +225,7 @@ function checkMine(r, c) {
 
     if (cellsRevealed === rows * columns - minesTotal) {
         document.getElementById("remaining-mines").innerText = "Cleared";
+        gameMsg.innerText = 'VICTORY!'
         gameOver = true;
     }
 }
@@ -223,22 +240,28 @@ function checkCell(r, c) {
     return 0;
 }
 
-
-
+// function countFlags() {      // not giving a number at the end, just an array of HTML
+//     flagsUsed = board.reduce((acc,flag) => {
+//         acc[flag] = acc[flag] ? acc[flag] +1 : 1;
+//         return acc;
+//     }, []);
+//     console.log(flagsUsed.toString())
+// };
 
 function resetGame(evt) {
-    // // new reset function, needs to remove board state
-    // // reset looks like it works but no new functions work.
+    board.splice(0, Infinity);                                          // removes all divs from board, but doesnt change the DOM
+    mineLocations.splice(0, Infinity);                                  // removes all mines from board
+    document.getElementById("board").classList.remove("revealed");      // clears background color changes from the DOM
+    document.getElementById("board").innerText = "";                    // removes any text on the DOM
 
-    board.splice(0, Infinity); // removes all divs from board, but doesnt change the DOM
-    mineLocations.splice(0, Infinity); // removes all mines from board
-    document.getElementById("board").classList.remove("revealed"); 
-    document.getElementById("board").innerText = "";
-
-
-    initialise(); 
-    console.log('game reset');
+    initialise();                                                       // rebuilds the board. Initialise also sets gameOver = false so new moves can be made
+    console.log('game reset');                                          // not sure why I haven't got rid of this...
 };
+
+
+
+
+
 
 
 

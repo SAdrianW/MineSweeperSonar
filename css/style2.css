@@ -4,19 +4,39 @@
 
 body {
     height: 100vh;
-    margin: 0;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #2891ac;
+    /* background-color: #2891ac; */
     text-align: center;
+    background-image: url(/images/ocean-waves.png);
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 header {
+    margin-top: 200px;
+    padding-top: 100px;
+    /* display: flex; */
+    justify-content: center;
+    align-items: center;
     text-align: center;
+    color: limegreen;
 }
+
+h1 {
+    font-size: 60px;
+    margin: 20px;
+}
+
+#message {
+    font-size: 40px;
+    margin: 20px;
+
+}
+
 
 .info-box {
     display: flex;
@@ -24,12 +44,30 @@ header {
     justify-content: space-between;
     align-items: center;
     column-gap: 15px;
+    font-size: 20px;
+    margin: 20px;
+    height: 80px;
+}
+
+.reset {
+    margin: 25px;
+    width: 80px;
+    height: 40px;
+    font-size: 20px;
+    background-color: lightgrey;
+    border: none;
+    color: rgb(220, 0, 0);
+}
+
+
+#remaining-mines {
+    font-size: 25px;
 }
 
 #board { 
-    width: 62vmin;
-    height: 62vmin;
-    border: 5px solid darkblue;
+    width: 600px;
+    height: 600px;
+    border: 5px darkblue;
     background-color: rgb(42, 148, 235);
     display: flex;
     flex-wrap: wrap;
@@ -37,8 +75,8 @@ header {
 }
 
 #board div {
-    height: 6vmin;
-    width: 6vmin;
+    height: 60px;
+    width: 60px;
     outline: 1px dashed navy;
     /* text */
     font-size: auto;
@@ -48,18 +86,9 @@ header {
 
 }
 
-/* not needed anymore, re-factored into default state */
-/* .hidden {
-    outline: 2px dotted navy;
-    color: transparent;
-} */
 
 .revealed {     /* cells gain this class when clicked */
-    /* outline: 2px double rgb(50, 50, 150); */
     background-color: rgb(21, 69, 109);
-    /* color: rgb(222, 117, 25);
-    text-align: center;
-    font-size: 8vmin; */
 }
 
 /* text colours for adjacent mine warnings */
@@ -95,20 +124,26 @@ header {
     color:hotpink
 }
 
-
-
 #flag-btn {
-    margin-top: 4vmin;
-    width: 10vmin;
-    height: 5vmin;
-    font-size: 3vmin;
+    margin: 25px;
+    width: 80px;
+    height: 40px;
+    font-size: 20px;
     background-color: lightgrey;
-    /* toggle on bg greenyellow */
     border: none;
 }
 
 h3 {
     text-align: center;
+}
+
+#flag-btn:hover {
+    border: 2px solid gold;
+
+}
+
+button:hover {
+    border: 2px solid gold;
 }
 
 footer {
